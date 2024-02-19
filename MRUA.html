@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Cálculo de la posición de un objeto (X) con MRUA</h1>
+    <button onclick="calculaPosicion()">Calcula posición</button>
+    <h1>Formulario Posición</h1>
+
+    <label for="aceleracion">Aceleración</label>
+    <input type="number" id="a">
+
+    <label for="tiempo">Tiempo</label>
+    <input type="number" id="t">
+
+    <button onclick="calculaPosicionFormulario()">Calcula posición</button>
+
+    <div id="display" style="border: 2px solid red;">
+
+        <script>
+            // Función para calcular la posición en MRUA
+            function calculaPosicionMRUA(a, t) {
+                let posicion = a * (Math.pow(t, 2) / 2);
+                return posicion;
+            }
+
+            // Función para calcular la posición con valores obtenidos mediante prompts
+            function calculaPosicion() {
+                let a = prompt("Dime la aceleración");
+                let t = prompt("Dime el tiempo");
+                let posicion = calculaPosicionMRUA(parseInt(a), parseInt(t));
+                let display = document.getElementById("display");
+                display.innerHTML = "La posición X es " + posicion + " metros" + alcanzaEstratosfera(posicion);
+            }
+
+            // Función para calcular la posición con valores obtenidos de un formulario
+            function calculaPosicionFormulario() {
+                let aceleracion = document.getElementById("a").value;
+                let tiempo = document.getElementById("t").value;
+                let posicion = calculaPosicionMRUA(parseInt(aceleracion), parseInt(tiempo));
+                let display = document.getElementById("display");
+                display.innerHTML = "La posición X es " + posicion + " metros" + alcanzaEstratosfera(posicion);
+            }
+
+            //Devuelve TRUE si x es mayor que 10000 metros y FALSE en caso contrario
+
+            function alcanzaEstratosfera(posicion) {
+                if (posicion > 10000) {
+                    return " (Alcanza estratosfera)";
+                } else {
+                    return " (No alcanza estratosfera)";
+                }
+
+            }
+        </script>
+    </div>
+</body>
